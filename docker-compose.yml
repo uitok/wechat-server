@@ -22,20 +22,10 @@ services:
     environment:
       - SQL_DSN=root:123456@tcp(host.docker.internal:3306)/one-api  # 修改此行，或注释掉以使用 SQLite 作为数据库
       - TZ=Asia/Shanghai
-      - REDIS_CONN_STRING=redis://redis
+
 
       
-   depends_on:
-      - redis
-    healthcheck:
-      test: [ "CMD-SHELL", "curl -s http://localhost:3000/api/status | grep -o '\"success\":\\s*true' | awk '{print $2}' | grep 'true'" ]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-  redis:
-    image: redis:latest
-    container_name: redis
-    restart: always
+
       
 
       
