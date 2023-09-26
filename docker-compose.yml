@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/build
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/data
+    ports:
+      - 3000:3000
+    environment:
+      - SQL_DSN=root:123456@tcp(host.docker.internal:3306)/one-api  # 修改此行，或注释掉以使用 SQLite 作为数据库
